@@ -3,6 +3,10 @@ const red_button = document.getElementById('red');
 const blue_button = document.getElementById('blue');
 const green_button = document.getElementById('green');
 const yellow_button = document.getElementById('yellow');
+const timer = document.getElementById('timer');
+let seconds = 0;
+let minutes = 0;
+let interval;
 const LAST_LEVEL = 10;
 class Game {
 	constructor() {
@@ -18,9 +22,23 @@ class Game {
 			btnStart.classList.add('hide');
 		}
 	}
+	timerLogic() {
+		seconds++;
+		if (seconds / 60 === 1) {
+			seconds = 0;
+			minutes++;
+		}
+	}
+	startTimer() {
+		interval = this.setInterval(() => {
+			this.timerLogic();
+		}, 1000);
+	}
 	start() {
 		this.nextLevel = this.nextLevel.bind(this);
 		this.chooseColor = this.chooseColor.bind(this);
+		this.startTimer = this.startTimer.bind(this);
+		this.startTimer();
 		this.togglebtnStart();
 		this.level = 1;
 		this.colours = {
