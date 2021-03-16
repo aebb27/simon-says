@@ -1,0 +1,8 @@
+.main__container {
+	height: 100%;
+}
+@media screen and (min-width: 1023px) {
+	#start-game {
+		font-size: 25px;
+	}
+}
