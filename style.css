@@ -51,6 +51,15 @@ body {
 		-8px -8px 20px -20px rgba(255, 255, 255, 0.95);
 	border-radius: 15px;
 }
+.timer {
+	font-weight: 600;
+	font-size: 16px;
+	margin: 10px 0 0 10px;
+}
+.record-time {
+	font-size: 16px;
+	margin: 10px 0 0 10px;
+}
 .hide {
 	display: none;
 }

@@ -4,9 +4,12 @@ const blue_button = document.getElementById('blue');
 const green_button = document.getElementById('green');
 const yellow_button = document.getElementById('yellow');
 const timer = document.getElementById('timer');
-let seconds = 0;
-let minutes = 0;
+const record = document.getElementById('record-time');
+let seconds = 0,
+	minutes = 0;
 let interval;
+let record_time;
+let displaySeconds, displayMinutes;
 const LAST_LEVEL = 10;
 class Game {
 	constructor() {
@@ -28,15 +31,39 @@ class Game {
 			seconds = 0;
 			minutes++;
 		}
+		if (seconds < 10) {
+			displaySeconds = '0' + seconds.toString();
+		} else {
+			displaySeconds = seconds.toString();
+		}
+		if (minutes < 10) {
+			displayMinutes = '0' + minutes.toString();
+		} else {
+			displayMinutes = minutes;
+		}
+		timer.innerHTML = `${displayMinutes}:${displaySeconds}`;
 	}
 	startTimer() {
-		interval = this.setInterval(() => {
-			this.timerLogic();
-		}, 1000);
+		interval = window.setInterval(this.timerLogic, 1000);
 	}
+	stopTimer() {
+		window.clearInterval(interval);
+		record_time = `${displayMinutes}:${displaySeconds}`;
+		record.innerHTML = record_time;
+	}
+	resetTimer() {
+		seconds = 0;
+		minutes = 0;
+		displaySeconds = '0' + seconds.toString();
+		displayMinutes = '0' + minutes.toString();
+		timer.innerHTML = `${displayMinutes}:${displaySeconds}`;
+	}
+	saveRecordTime() {}
 	start() {
 		this.nextLevel = this.nextLevel.bind(this);
 		this.chooseColor = this.chooseColor.bind(this);
+		this.timerLogic = this.timerLogic.bind(this);
+		this.stopTimer = this.stopTimer.bind(this);
 		this.startTimer = this.startTimer.bind(this);
 		this.startTimer();
 		this.togglebtnStart();
@@ -63,6 +90,9 @@ class Game {
 			button: 'Comenzar de nuevo',
 		}).then(() => {
 			this.deleteClickEvents();
+			this.stopTimer();
+			this.saveRecordTime();
+			this.resetTimer();
 			this.start();
 		});
 	}
