@@ -7,8 +7,8 @@ const timer = document.getElementById('timer');
 const record = document.getElementById('record-time');
 let seconds = 0,
 	minutes = 0;
-let interval;
-let record_time;
+let interval, record_time;
+let recordArray = [];
 let displaySeconds, displayMinutes;
 const LAST_LEVEL = 10;
 class Game {
@@ -48,8 +48,7 @@ class Game {
 	}
 	stopTimer() {
 		window.clearInterval(interval);
-		record_time = `${displayMinutes}:${displaySeconds}`;
-		record.innerHTML = record_time;
+		this.saveRecordTime();
 	}
 	resetTimer() {
 		seconds = 0;
@@ -58,7 +57,21 @@ class Game {
 		displayMinutes = '0' + minutes.toString();
 		timer.innerHTML = `${displayMinutes}:${displaySeconds}`;
 	}
-	saveRecordTime() {}
+	saveRecordTime() {
+		if (recordArray.length === 0) {
+			recordArray.push(`${displayMinutes}:${displaySeconds}`);
+			record.innerHTML = timer.innerHTML;
+		} else if (recordArray.length >= 1) {
+			recordArray.push(`${displayMinutes}:${displaySeconds}`);
+			if (recordArray.length === 1) {
+				record.innerHTML = timer.innerHTML;
+			} else if (recordArray.length > 1) {
+				recordArray.sort();
+				record_time = recordArray[recordArray.length - 1];
+				record.innerHTML = record_time;
+			}
+		}
+	}
 	start() {
 		this.nextLevel = this.nextLevel.bind(this);
 		this.chooseColor = this.chooseColor.bind(this);
@@ -91,7 +104,6 @@ class Game {
 		}).then(() => {
 			this.deleteClickEvents();
 			this.stopTimer();
-			this.saveRecordTime();
 			this.resetTimer();
 			this.start();
 		});
