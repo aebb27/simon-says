@@ -3,11 +3,20 @@ const red_button = document.getElementById('red');
 const blue_button = document.getElementById('blue');
 const green_button = document.getElementById('green');
 const yellow_button = document.getElementById('yellow');
-const LAST_LEVEL = 10;
+const timer = document.getElementById('timer');
+const record = document.getElementById('record-time');
+let seconds = 0,
+	minutes = 0;
+let interval, record_time;
+let recordArray = [];
+let displaySeconds, displayMinutes;
+const LAST_LEVEL = 5;
 class Game {
 	constructor() {
-		this.start();
+		this.startTimer = this.startTimer.bind(this);
 		this.start = this.start.bind(this);
+		this.start();
+		this.startTimer();
 		this.generateSequence();
 		this.nextLevel();
 	}
@@ -18,9 +27,58 @@ class Game {
 			btnStart.classList.add('hide');
 		}
 	}
+	timerLogic() {
+		seconds++;
+		if (seconds / 60 === 1) {
+			seconds = 0;
+			minutes++;
+		}
+		if (seconds < 10) {
+			displaySeconds = '0' + seconds.toString();
+		} else {
+			displaySeconds = seconds.toString();
+		}
+		if (minutes < 10) {
+			displayMinutes = '0' + minutes.toString();
+		} else {
+			displayMinutes = minutes;
+		}
+		timer.innerHTML = `${displayMinutes}:${displaySeconds}`;
+	}
+	startTimer() {
+		interval = window.setInterval(this.timerLogic, 1000);
+	}
+	stopTimer() {
+		window.clearInterval(interval);
+		this.saveRecordTime();
+	}
+	resetTimer() {
+		seconds = 0;
+		minutes = 0;
+		displaySeconds = '0' + seconds.toString();
+		displayMinutes = '0' + minutes.toString();
+		timer.innerHTML = `${displayMinutes}:${displaySeconds}`;
+	}
+	saveRecordTime() {
+		if (recordArray.length === 0) {
+			recordArray.push(`${displayMinutes}:${displaySeconds}`);
+			record.innerHTML = timer.innerHTML;
+		} else if (recordArray.length >= 1) {
+			recordArray.push(`${displayMinutes}:${displaySeconds}`);
+			if (recordArray.length === 1) {
+				record.innerHTML = timer.innerHTML;
+			} else if (recordArray.length > 1) {
+				recordArray.sort();
+				record_time = recordArray[recordArray.length - 1];
+				record.innerHTML = record_time;
+			}
+		}
+	}
 	start() {
 		this.nextLevel = this.nextLevel.bind(this);
 		this.chooseColor = this.chooseColor.bind(this);
+		this.timerLogic = this.timerLogic.bind(this);
+		this.stopTimer = this.stopTimer.bind(this);
 		this.togglebtnStart();
 		this.level = 1;
 		this.colours = {
@@ -33,7 +91,9 @@ class Game {
 	win() {
 		swal('Felicidades', 'Has Ganado', 'success', {
 			button: 'Regresar',
-		}).then(this.start);
+		}).then(() => {
+			this.stopTimer(), this.resetTimer(), this.start();
+		});
 	}
 	winToNextLevel() {
 		swal('Felicidades', 'Has superado este nivel', 'success', {
@@ -45,6 +105,8 @@ class Game {
 			button: 'Comenzar de nuevo',
 		}).then(() => {
 			this.deleteClickEvents();
+			this.stopTimer();
+			this.resetTimer();
 			this.start();
 		});
 	}
