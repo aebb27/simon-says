@@ -10,11 +10,13 @@ let seconds = 0,
 let interval, record_time;
 let recordArray = [];
 let displaySeconds, displayMinutes;
-const LAST_LEVEL = 10;
+const LAST_LEVEL = 5;
 class Game {
 	constructor() {
-		this.start();
+		this.startTimer = this.startTimer.bind(this);
 		this.start = this.start.bind(this);
+		this.start();
+		this.startTimer();
 		this.generateSequence();
 		this.nextLevel();
 	}
@@ -77,8 +79,6 @@ class Game {
 		this.chooseColor = this.chooseColor.bind(this);
 		this.timerLogic = this.timerLogic.bind(this);
 		this.stopTimer = this.stopTimer.bind(this);
-		this.startTimer = this.startTimer.bind(this);
-		this.startTimer();
 		this.togglebtnStart();
 		this.level = 1;
 		this.colours = {
@@ -91,7 +91,9 @@ class Game {
 	win() {
 		swal('Felicidades', 'Has Ganado', 'success', {
 			button: 'Regresar',
-		}).then(this.start);
+		}).then(() => {
+			this.stopTimer(), this.resetTimer(), this.start();
+		});
 	}
 	winToNextLevel() {
 		swal('Felicidades', 'Has superado este nivel', 'success', {
