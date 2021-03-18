@@ -8,12 +8,18 @@
 		<title>Simon Says</title>
 	</head>
 	<body>
-		<div class="main__container">
+		<header>
+			<p class="record-score">
+				Tu puntaje actual es: <span id="actual-score">0</span>
+			</p>
+			<p class="record-score">Tu mejor puntaje es: <span id="score">0</span></p>
+		</header>
+		<main class="main__container">
 			<div class="button-div red" id="red" data-color="red"></div>
 			<div class="button-div blue" id="blue" data-color="blue"></div>
 			<div class="button-div green" id="green" data-color="green"></div>
 			<div class="button-div yellow" id="yellow" data-color="yellow"></div>
-		</div>
+		</main>
 		<button id="start-game" onclick="startGame()">empecemos a jugar!</button>
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"

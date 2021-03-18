@@ -3,6 +3,10 @@ const red_button = document.getElementById('red');
 const blue_button = document.getElementById('blue');
 const green_button = document.getElementById('green');
 const yellow_button = document.getElementById('yellow');
+const actual_score = document.getElementById('actual-score');
+const best_score = document.getElementById('score');
+let points = 0;
+let bestScore = [];
 const LAST_LEVEL = 10;
 class Game {
 	constructor() {
@@ -33,12 +37,18 @@ class Game {
 	win() {
 		swal('Felicidades', 'Has Ganado', 'success', {
 			button: 'Regresar',
-		}).then(this.start);
+		}).then(() => {
+			this.start();
+			this.saveScore(bestScore);
+		});
 	}
 	winToNextLevel() {
 		swal('Felicidades', 'Has superado este nivel', 'success', {
 			button: 'Avanzar',
-		}).then(() => setTimeout(this.nextLevel, 1250));
+		}).then(() => {
+			setTimeout(this.nextLevel, 1250);
+			this.addScore();
+		});
 	}
 	lose() {
 		swal('Oh Vaya!', 'Has Perdido', 'error', {
@@ -46,6 +56,8 @@ class Game {
 		}).then(() => {
 			this.deleteClickEvents();
 			this.start();
+			this.saveScore(bestScore);
+			this.resetScore();
 		});
 	}
 	generateSequence() {
@@ -65,12 +77,25 @@ class Game {
 		this.colours.green.removeEventListener('click', this.chooseColor);
 		this.colours.yellow.removeEventListener('click', this.chooseColor);
 	}
+	saveScore(scoreArray) {
+		let displayScore = Math.max.apply(null, scoreArray);
+		best_score.innerHTML = displayScore;
+	}
+	addScore() {
+		actual_score.innerHTML = points;
+		bestScore.push(points);
+	}
+	resetScore() {
+		points = 0;
+		actual_score.innerHTML = points;
+	}
 	chooseColor(ev) {
 		const colorName = ev.target.dataset.color;
 		const numberColor = this.turnColoursToNumbers(colorName);
 		this.ligthColor(colorName);
 		if (numberColor === this.sequence[this.subLevel]) {
 			this.subLevel++;
+			points += 2;
 			if (this.subLevel === this.level) {
 				this.level++;
 				this.deleteClickEvents();

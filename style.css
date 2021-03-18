@@ -51,6 +51,9 @@ body {
 		-8px -8px 20px -20px rgba(255, 255, 255, 0.95);
 	border-radius: 15px;
 }
+.record-score {
+	margin: 10px 0 0 10px;
+}
 .hide {
 	display: none;
 }
