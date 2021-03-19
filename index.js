@@ -140,16 +140,17 @@ class Game {
 	}
 	turnOffColor(color) {
 		this.colours[color].classList.remove('light');
+		this.addClickEvents();
 	}
 	ligthColor(color) {
 		this.colours[color].classList.add('light');
+		this.deleteClickEvents();
 		setTimeout(() => this.turnOffColor(color), 400);
 	}
 	lightSequence() {
 		for (let i = 0; i < this.level; i++) {
 			const color = this.turnNumbersToColours(this.sequence[i]);
 			setTimeout(() => this.ligthColor(color), 1075 * i);
-			this.deleteClickEvents();
 		}
 	}
 }
