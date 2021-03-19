@@ -1,16 +1,22 @@
-const btnStart = document.getElementById('start-game');
-const red_button = document.getElementById('red');
-const blue_button = document.getElementById('blue');
-const green_button = document.getElementById('green');
-const yellow_button = document.getElementById('yellow');
-const timer = document.getElementById('timer');
-const record = document.getElementById('record-time');
+const btnStart = document.getElementById('start-game'),
+	red_button = document.getElementById('red'),
+	blue_button = document.getElementById('blue'),
+	green_button = document.getElementById('green'),
+	yellow_button = document.getElementById('yellow'),
+	timer = document.getElementById('timer'),
+	record = document.getElementById('record-time'),
+	easy = document.getElementById('easy'),
+	intermediate = document.getElementById('intermediate'),
+	hard = document.getElementById('hard');
 let seconds = 0,
 	minutes = 0;
 let interval, record_time;
 let recordArray = [];
 let displaySeconds, displayMinutes;
-const LAST_LEVEL = 5;
+const easyLvlQty = 5,
+	intermediateLvlQty = 15,
+	hardLvlQty = 25;
+let LAST_LEVEL;
 class Game {
 	constructor() {
 		this.startTimer = this.startTimer.bind(this);
@@ -104,7 +110,7 @@ class Game {
 		swal('Oh Vaya!', 'Has Perdido', 'error', {
 			button: 'Comenzar de nuevo',
 		}).then(() => {
-			this.deleteClickEvents();
+			this.deleteClickEventsColours();
 			this.stopTimer();
 			this.resetTimer();
 			this.start();
@@ -115,13 +121,13 @@ class Game {
 			.fill(0)
 			.map((n) => Math.floor(Math.random() * 4));
 	}
-	addClickEvents() {
+	addClickEventsColours() {
 		this.colours.red.addEventListener('click', this.chooseColor);
 		this.colours.blue.addEventListener('click', this.chooseColor);
 		this.colours.green.addEventListener('click', this.chooseColor);
 		this.colours.yellow.addEventListener('click', this.chooseColor);
 	}
-	deleteClickEvents() {
+	deleteClickEventsColours() {
 		this.colours.red.removeEventListener('click', this.chooseColor);
 		this.colours.blue.removeEventListener('click', this.chooseColor);
 		this.colours.green.removeEventListener('click', this.chooseColor);
@@ -135,7 +141,7 @@ class Game {
 			this.subLevel++;
 			if (this.subLevel === this.level) {
 				this.level++;
-				this.deleteClickEvents();
+				this.deleteClickEventsColours();
 				if (this.level === LAST_LEVEL + 1) {
 					this.win();
 				} else {
@@ -149,7 +155,7 @@ class Game {
 	nextLevel() {
 		this.subLevel = 0;
 		this.lightSequence();
-		this.addClickEvents();
+		this.addClickEventsColours();
 	}
 	turnNumbersToColours(number) {
 		switch (number) {
@@ -188,6 +194,14 @@ class Game {
 			setTimeout(() => this.ligthColor(color), 1075 * i);
 		}
 	}
+}
+function selectDifficulty() {
+	easy.addEventListener('click', () => (LAST_LEVEL = easyLvlQty));
+	intermediate.addEventListener(
+		'click',
+		() => (LAST_LEVEL = intermediateLvlQty),
+	);
+	hard.addEventListener('click', () => (LAST_LEVEL = hardLvlQty));
 }
 function startGame() {
 	window.game = new Game();

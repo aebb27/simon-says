@@ -11,16 +11,48 @@
 		<header>
 			<div class="timer" id="timer">00:00</div>
 			<div class="record-time">
-				Tu mejor puntuación es: <span id="record-time">00:00</span>
+				Mejor Tiempo: <span id="record-time">00:00</span>
 			</div>
 		</header>
-		<main class="main__container">
-			<div class="button-div red" id="red" data-color="red"></div>
-			<div class="button-div blue" id="blue" data-color="blue"></div>
-			<div class="button-div green" id="green" data-color="green"></div>
-			<div class="button-div yellow" id="yellow" data-color="yellow"></div>
+		<main>
+			<section class="difficulty-options">
+				<button
+					class="select-difficulty"
+					data-level="easy"
+					id="easy"
+					onclick="selectDifficulty()"
+				>
+					Fácil
+				</button>
+				<button
+					class="select-difficulty"
+					data-level="intermediate"
+					id="intermediate"
+					onclick="selectDifficulty()"
+				>
+					Intermedio
+				</button>
+				<button
+					class="select-difficulty"
+					data-level="hard"
+					id="hard"
+					onclick="selectDifficulty()"
+				>
+					Díficil
+				</button>
+			</section>
+			<section class="simon-says-section">
+				<div class="main__container">
+					<div class="button-div red" id="red" data-color="red"></div>
+					<div class="button-div blue" id="blue" data-color="blue"></div>
+					<div class="button-div green" id="green" data-color="green"></div>
+					<div class="button-div yellow" id="yellow" data-color="yellow"></div>
+				</div>
+				<button id="start-game" onclick="startGame()">
+					empecemos a jugar!
+				</button>
+			</section>
 		</main>
-		<button id="start-game" onclick="startGame()">empecemos a jugar!</button>
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
 			integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
