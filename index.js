@@ -149,6 +149,7 @@ class Game {
 		for (let i = 0; i < this.level; i++) {
 			const color = this.turnNumbersToColours(this.sequence[i]);
 			setTimeout(() => this.ligthColor(color), 1075 * i);
+			this.deleteClickEvents();
 		}
 	}
 }
