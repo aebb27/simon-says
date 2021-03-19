@@ -140,11 +140,9 @@ class Game {
 	}
 	turnOffColor(color) {
 		this.colours[color].classList.remove('light');
-		this.addClickEvents();
 	}
 	ligthColor(color) {
 		this.colours[color].classList.add('light');
-		this.deleteClickEvents();
 		setTimeout(() => this.turnOffColor(color), 400);
 	}
 	lightSequence() {
