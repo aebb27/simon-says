@@ -1,3 +1,9 @@
+header {
+	padding: 0 10%;
+}
+.title {
+	font-size: 48px;
+}
 .timer {
 	font-size: 18px;
 }
