@@ -8,6 +8,25 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	padding: 10px;
+}
+.timer {
+	font-weight: 600;
+	font-size: 12px;
+}
+.record-time,
+.record-score {
+	font-size: 10px;
+}
+#record-time,
+.score-output {
+	font-weight: bold;
+}
 main {
 	width: 100%;
 	height: auto;
@@ -31,9 +50,9 @@ main {
 	position: relative;
 	outline: none;
 }
-.select-difficulty:hover {
-	border-radius: 15px;
-	transform: scale(1.1);
+.select-difficulty:active,
+#start-game:active {
+	box-shadow: 0 0 0 4px #272929, 0 0 0 8px rgb(255, 255, 255);
 }
 .simon-says-section {
 	position: relative;
@@ -83,25 +102,6 @@ main {
 	transform: translateX(-50%);
 	box-shadow: 5px 5px 10px -10px rgba(0, 0, 0, 0.5),
 		-5px -5px 10px -10px rgba(0, 0, 0, 0.5);
-}
-#start-game:hover {
-	box-shadow: 8px 8px 20px -20px rgba(255, 255, 255, 0.95),
-		-8px -8px 20px -20px rgba(255, 255, 255, 0.95);
-	border-radius: 15px;
-}
-.timer {
-	font-weight: 600;
-	font-size: 12px;
-	margin: 10px 0 0 10px;
-	color: white;
-}
-.record-time {
-	font-size: 10px;
-	margin: 10px 0 0 10px;
-	color: white;
-}
-#record-time {
-	font-weight: bold;
 }
 .hide {
 	display: none;

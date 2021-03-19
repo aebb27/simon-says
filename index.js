@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const btnStart = document.getElementById('start-game'),
 	red_button = document.getElementById('red'),
 	blue_button = document.getElementById('blue'),
@@ -18,26 +17,22 @@ const easyLvlQty = 5,
 	intermediateLvlQty = 15,
 	hardLvlQty = 25;
 let LAST_LEVEL;
-=======
-const btnStart = document.getElementById('start-game');
-const red_button = document.getElementById('red');
-const blue_button = document.getElementById('blue');
-const green_button = document.getElementById('green');
-const yellow_button = document.getElementById('yellow');
 const actual_score = document.getElementById('actual-score');
 const best_score = document.getElementById('score');
 let points = 0;
 let bestScore = [];
-const LAST_LEVEL = 10;
->>>>>>> score
 class Game {
 	constructor() {
 		this.startTimer = this.startTimer.bind(this);
 		this.start = this.start.bind(this);
-		this.start();
-		this.startTimer();
-		this.generateSequence();
-		this.nextLevel();
+		if (LAST_LEVEL === undefined) {
+			swal('Oops...', 'Asegurate de escoger un nivel de dificultad', 'warning');
+		} else {
+			this.start();
+			this.startTimer();
+			this.generateSequence();
+			this.nextLevel();
+		}
 	}
 	togglebtnStart() {
 		if (btnStart.classList.contains('hide')) {
@@ -112,9 +107,10 @@ class Game {
 			button: 'Regresar',
 		}).then(() => {
 			this.stopTimer();
-      this.resetTimer();
+			this.resetTimer();
 			this.start();
 			this.saveScore(bestScore);
+			this.resetScore();
 		});
 	}
 	winToNextLevel() {
