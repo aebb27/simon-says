@@ -3,30 +3,70 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+:root {
+	--bg: #fff;
+	--foreground: #bdc7c7;
+	--btn-txt-color: #000;
+	--red-btn: #800000;
+	--blue-btn: #000080;
+	--green-btn: #008000;
+	--yellow-btn: #929201;
+	--red-light: #ff0000;
+	--blue-light: #0000ff;
+	--green-light: #00ff00;
+	--yellow-light: #ffff00;
+	--txt-color: #000;
+	--inside-shadow: #fff;
+	--outside-shadow: #000;
+	--hover-shadows: rgba(0, 0, 0, 0.95);
+}
+.dark-mode {
+	--bg: #272929;
+	--foreground: #fff;
+	--btn-txt-color: #272929;
+	--red-btn: #990000;
+	--blue-btn: #5124b3;
+	--green-btn: #008000;
+	--yellow-btn: #929201;
+	--red-light: #ff0000;
+	--blue-light: #7433ff;
+	--green-light: #00ff00;
+	--yellow-light: #ffff00;
+	--txt-color: #fff;
+	--inside-shadow: #272929;
+	--outside-shadow: #fff;
+	--hover-shadows: rgba(0, 0, 0, 0.95);
+}
 body {
-	background: #272929;
+	background: var(--bg);
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	color: white;
+	display: grid;
+	grid-template: repeat(2, 1fr) / repeat(2, 1fr) auto;
+	place-items: center;
+	color: var(--txt-color);
 	padding: 10px;
 }
-header {
-	display: grid;
-	grid-template: repeat(2, 1fr) / repeat(2, 1fr);
-	place-items: center;
-	color: white;
-	padding: 10px;
+.toggle-dark-mode {
+	outline: none;
+	background-color: transparent;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.toggle-dark-mode:active {
+	box-shadow: 0 0 0 1px var(--inside-shadow), 0 0 0 2px var(--outside-shadow);
+}
+.score-container {
+	grid-area: 2/ 2/ 3 / 4;
 }
 .title {
 	grid-area: 1 / 1 / 2 / 3;
 	text-transform: capitalize;
 }
-
 .timer {
 	font-weight: 600;
 	font-size: 12px;
@@ -50,6 +90,8 @@ main {
 	padding: 0 5px;
 }
 .select-difficulty {
+	background: var(--foreground);
+	color: var(--btn-txt-color);
 	margin: 0 5px;
 	width: 100%;
 	min-width: 75px;
@@ -64,7 +106,7 @@ main {
 }
 .select-difficulty:active,
 #start-game:active {
-	box-shadow: 0 0 0 4px #272929, 0 0 0 8px rgb(255, 255, 255);
+	box-shadow: 0 0 0 4px var(--bg), 0 0 0 8px var(--foreground);
 }
 .simon-says-section {
 	position: relative;
@@ -85,18 +127,20 @@ main {
 	position: relative;
 }
 .button-div:nth-of-type(1) {
-	background: #800000;
+	background: var(--red-btn);
 }
 .button-div:nth-of-type(2) {
-	background: #000080;
+	background: var(--blue-btn);
 }
 .button-div:nth-of-type(3) {
-	background: green;
+	background: var(--green-btn);
 }
 .button-div:nth-of-type(4) {
-	background: #929201;
+	background: var(--yellow-btn);
 }
 #start-game {
+	background: var(--foreground);
+	color: var(--btn-txt-color);
 	width: 60%;
 	min-width: 276px;
 	max-width: 450px;
@@ -119,14 +163,14 @@ main {
 	display: none;
 }
 .red.light {
-	background: red;
+	background: var(--red-light);
 }
 .blue.light {
-	background: blue;
+	background: var(--blue-light);
 }
 .green.light {
-	background: #00ff00;
+	background: var(--green-light);
 }
 .yellow.light {
-	background: yellow;
+	background: var(--yellow-light);
 }
