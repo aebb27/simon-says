@@ -7,20 +7,32 @@ const btnStart = document.getElementById('start-game'),
 	record = document.getElementById('record-time'),
 	easy = document.getElementById('easy'),
 	intermediate = document.getElementById('intermediate'),
-	hard = document.getElementById('hard');
+	hard = document.getElementById('hard'),
+	actual_score = document.getElementById('actual-score'),
+	best_score = document.getElementById('score'),
+	darkModeToggle = document.querySelector('#toggle-dark-mode'),
+	enableDarkMode = () => {
+		document.body.classList.add('dark-mode');
+		localStorage.setItem('darkMode', 'enabled');
+	},
+	disableDarkMode = () => {
+		document.body.classList.remove('dark-mode');
+		localStorage.setItem('darkMode', null);
+	};
 let seconds = 0,
-	minutes = 0;
-let interval, record_time;
-let recordArray = [];
-let displaySeconds, displayMinutes;
+	minutes = 0,
+	interval,
+	record_time,
+	recordArray = [],
+	displaySeconds,
+	displayMinutes,
+	LAST_LEVEL,
+	points = 0,
+	bestScore = [],
+	darkMode = localStorage.getItem('darkMode');
 const easyLvlQty = 5,
 	intermediateLvlQty = 15,
 	hardLvlQty = 25;
-let LAST_LEVEL;
-const actual_score = document.getElementById('actual-score');
-const best_score = document.getElementById('score');
-let points = 0;
-let bestScore = [];
 class Game {
 	constructor() {
 		this.startTimer = this.startTimer.bind(this);
@@ -236,3 +248,14 @@ function selectDifficulty() {
 function startGame() {
 	window.game = new Game();
 }
+if (darkMode === 'enabled') {
+	enableDarkMode();
+}
+darkModeToggle.addEventListener('click', () => {
+	darkMode = localStorage.getItem('darkMode');
+	if (darkMode !== 'enabled') {
+		enableDarkMode();
+	} else {
+		disableDarkMode();
+	}
+});
