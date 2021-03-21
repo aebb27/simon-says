@@ -4,7 +4,9 @@ header {
 .title {
 	font-size: 48px;
 }
-.timer {
+.timer,
+#record-time,
+.score-output {
 	font-size: 18px;
 }
 .record-time,

@@ -29,7 +29,15 @@ let seconds = 0,
 	LAST_LEVEL,
 	points = 0,
 	bestScore = [],
-	darkMode = localStorage.getItem('darkMode');
+	darkMode = localStorage.getItem('darkMode'),
+	winner,
+	loser,
+	lvl,
+	targetTile,
+	chooseDifficulty,
+	startAgain,
+	forward,
+	backward;
 const easyLvlQty = 5,
 	intermediateLvlQty = 15,
 	hardLvlQty = 25;
@@ -38,6 +46,7 @@ class Game {
 		this.startTimer = this.startTimer.bind(this);
 		this.start = this.start.bind(this);
 		if (LAST_LEVEL === undefined) {
+			chooseDifficulty.play();
 			swal('Oops...', 'Asegurate de escoger un nivel de dificultad', 'warning');
 		} else {
 			this.start();
@@ -115,6 +124,7 @@ class Game {
 		};
 	}
 	win() {
+		winner.play();
 		swal('Felicidades', 'Has Ganado', 'success', {
 			button: 'Regresar',
 		}).then(() => {
@@ -123,9 +133,11 @@ class Game {
 			this.start();
 			this.saveScore(bestScore);
 			this.resetScore();
+			startAgain.play();
 		});
 	}
 	winToNextLevel() {
+		lvl.play();
 		swal('Felicidades', 'Has superado este nivel', 'success', {
 			button: 'Avanzar',
 		}).then(() => {
@@ -134,6 +146,7 @@ class Game {
 		});
 	}
 	lose() {
+		loser.play();
 		swal('Oh Vaya!', 'Has Perdido', 'error', {
 			button: 'Comenzar de nuevo',
 		}).then(() => {
@@ -143,6 +156,7 @@ class Game {
 			this.start();
 			this.saveScore(bestScore);
 			this.resetScore();
+			startAgain.play();
 		});
 	}
 	generateSequence() {
@@ -179,6 +193,7 @@ class Game {
 		const numberColor = this.turnColoursToNumbers(colorName);
 		this.ligthColor(colorName);
 		if (numberColor === this.sequence[this.subLevel]) {
+			targetTile.play();
 			this.subLevel++;
 			points += 2;
 			if (this.subLevel === this.level) {
@@ -187,7 +202,7 @@ class Game {
 				if (this.level === LAST_LEVEL + 1) {
 					this.win();
 				} else {
-					this.winToNextLevel();
+					setTimeout(() => this.winToNextLevel(), 575);
 				}
 			}
 		} else {
@@ -246,6 +261,12 @@ function selectDifficulty() {
 	hard.addEventListener('click', () => (LAST_LEVEL = hardLvlQty));
 }
 function startGame() {
+	winner = new sound('./sounds/win.wav');
+	loser = new sound('./sounds/lose.wav');
+	lvl = new sound('./sounds/level.wav');
+	startAgain = new sound('./sounds/back-to-start.wav');
+	targetTile = new sound('./sounds/target-tile.wav');
+	chooseDifficulty = new sound('./sounds/choose-difficulty.wav');
 	window.game = new Game();
 }
 if (darkMode === 'enabled') {
@@ -254,8 +275,28 @@ if (darkMode === 'enabled') {
 darkModeToggle.addEventListener('click', () => {
 	darkMode = localStorage.getItem('darkMode');
 	if (darkMode !== 'enabled') {
+		forward = new sound('./sounds/forward.wav');
+		forward.play();
 		enableDarkMode();
 	} else {
+		backward = new sound('./sounds/backward.wav');
+		backward.play();
 		disableDarkMode();
 	}
 });
+class sound {
+	constructor(src) {
+		this.sound = document.createElement('audio');
+		this.sound.src = src;
+		this.sound.setAttribute('preload', 'auto');
+		this.sound.setAttribute('controls', 'none');
+		this.sound.style.display = 'none';
+		document.body.appendChild(this.sound);
+		this.play = function () {
+			this.sound.play();
+		};
+		this.stop = function () {
+			this.sound.pause();
+		};
+	}
+}

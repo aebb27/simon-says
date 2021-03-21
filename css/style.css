@@ -72,6 +72,7 @@ header {
 	grid-area: 2/ 2/ 3 / 4;
 	display: grid;
 	grid-template: repeat(2, auto) / repeat(2, auto);
+	place-items: center;
 	gap: 5px;
 }
 .title {
@@ -82,6 +83,7 @@ header {
 .time-container {
 	display: grid;
 	grid-template: repeat(2, auto) / repeat(2, auto);
+	align-items: center;
 	gap: 5px;
 }
 .timer {
@@ -214,4 +216,7 @@ main {
 	.main__container {
 		min-height: 370px;
 	}
+}
+button {
+	user-select: none;
 }
