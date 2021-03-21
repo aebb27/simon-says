@@ -25,30 +25,23 @@
 					xmlns="http://www.w3.org/2000/svg"
 				>
 					<path
-						fill-rule="evenodd"
-						clip-rule="evenodd"
+						fill-rule="nonzero"
+						clip-rule="nonzero"
 						d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM9 17.9381V2.06189C5.05369 2.55399 2 5.92038 2 10C2 14.0796 5.05369 17.446 9 17.9381ZM18 10C18 14.0796 14.9463 17.446 11 17.9381V2.06189C14.9463 2.55399 18 5.92038 18 10Z"
-						fill="var(--txt-color)"
-					/>
-					<path
-						d="M9 17.9381V2.06189C5.05369 2.55399 2 5.92038 2 10C2 14.0796 5.05369 17.446 9 17.9381Z"
 						fill="var(--txt-color)"
 					/>
 				</svg>
 			</button>
 			<div class="time-container">
 				<div class="timer" id="timer">00:00</div>
-				<div class="record-time">
-					Mejor Tiempo: <span id="record-time">00:00</span>
-				</div>
+				<div class="record-time">Mejor Tiempo:</div>
+				<span id="record-time">00:00</span>
 			</div>
 			<div class="score-container">
-				<p class="record-score">
-					Puntaje Actual: <span class="score-output" id="actual-score">0</span>
-				</p>
-				<p class="record-score">
-					Mejor Puntaje: <span class="score-output" id="score">0</span>
-				</p>
+				<p class="record-score">Puntaje Actual:</p>
+				<span class="score-output" id="actual-score">0</span>
+				<p class="record-score">Mejor Puntaje:</p>
+				<span class="score-output" id="score">0</span>
 			</div>
 		</header>
 		<main>

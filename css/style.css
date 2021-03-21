@@ -5,7 +5,7 @@
 }
 :root {
 	--bg: #fff;
-	--foreground: #bdc7c7;
+	--foreground: #fff;
 	--btn-txt-color: #000;
 	--red-btn: #800000;
 	--blue-btn: #000080;
@@ -19,11 +19,14 @@
 	--inside-shadow: #fff;
 	--outside-shadow: #000;
 	--hover-shadows: rgba(0, 0, 0, 0.95);
+	--hover: #f6f6f6;
+	--active: #e3e3e3;
+	--border-line-color: 1px solid #000;
 }
 .dark-mode {
-	--bg: #272929;
-	--foreground: #fff;
-	--btn-txt-color: #272929;
+	--bg: #111823;
+	--foreground: #2e343d;
+	--btn-txt-color: #fff;
 	--red-btn: #990000;
 	--blue-btn: #5124b3;
 	--green-btn: #008000;
@@ -33,9 +36,12 @@
 	--green-light: #00ff00;
 	--yellow-light: #ffff00;
 	--txt-color: #fff;
-	--inside-shadow: #272929;
+	--inside-shadow: #111823;
 	--outside-shadow: #fff;
 	--hover-shadows: rgba(0, 0, 0, 0.95);
+	--hover: #363c45;
+	--active: #474c54;
+	--border-line-color: 1px solid #ffffff;
 }
 body {
 	background: var(--bg);
@@ -45,11 +51,13 @@ body {
 header {
 	display: grid;
 	grid-template: repeat(2, 1fr) / repeat(2, 1fr) auto;
+	gap: 5px 0;
 	place-items: center;
 	color: var(--txt-color);
 	padding: 10px;
 }
 .toggle-dark-mode {
+	cursor: pointer;
 	outline: none;
 	background-color: transparent;
 	border: none;
@@ -58,26 +66,40 @@ header {
 	justify-content: center;
 }
 .toggle-dark-mode:active {
-	box-shadow: 0 0 0 1px var(--inside-shadow), 0 0 0 2px var(--outside-shadow);
+	border: var(--border-line-color);
 }
 .score-container {
 	grid-area: 2/ 2/ 3 / 4;
+	display: grid;
+	grid-template: repeat(2, auto) / repeat(2, auto);
+	gap: 5px;
 }
 .title {
 	grid-area: 1 / 1 / 2 / 3;
 	text-transform: capitalize;
+	opacity: 87%;
+}
+.time-container {
+	display: grid;
+	grid-template: repeat(2, auto) / repeat(2, auto);
+	gap: 5px;
 }
 .timer {
 	font-weight: 600;
 	font-size: 12px;
+	opacity: 87%;
+	grid-area: 1/1/2/3;
 }
 .record-time,
 .record-score {
 	font-size: 10px;
+	opacity: 60%;
 }
 #record-time,
 .score-output {
 	font-weight: bold;
+	opacity: 87%;
+	font-size: 10px;
 }
 main {
 	width: 100%;
@@ -99,14 +121,19 @@ main {
 	border: none;
 	padding: 5px;
 	font-weight: 500;
-	box-shadow: 5px 5px 10px -10px rgba(0, 0, 0, 0.5),
-		-5px -5px 10px -10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.25),
+		0px 1px 2px rgba(0, 0, 0, 0.25);
 	position: relative;
 	outline: none;
 }
 .select-difficulty:active,
 #start-game:active {
-	box-shadow: 0 0 0 4px var(--bg), 0 0 0 8px var(--foreground);
+	background: var(--active);
+	border: var(--border-line-color);
+}
+.select-difficulty:hover,
+#start-game:hover {
+	background: var(--hover);
 }
 .simon-says-section {
 	position: relative;
@@ -119,12 +146,15 @@ main {
 	max-width: 400px;
 	height: 100%;
 	min-height: 266px;
+	max-height: 400px;
 	margin: 0 auto;
 	border-radius: 50%;
 	display: grid;
 	grid-template: repeat(2, 1fr) / repeat(2, 1fr);
 	overflow: hidden;
 	position: relative;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1),
+		0px 1px 2px 2px rgba(0, 0, 0, 0.15);
 }
 .button-div:nth-of-type(1) {
 	background: var(--red-btn);
@@ -156,8 +186,8 @@ main {
 	bottom: 42.5%;
 	left: 50%;
 	transform: translateX(-50%);
-	box-shadow: 5px 5px 10px -10px rgba(0, 0, 0, 0.5),
-		-5px -5px 10px -10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.25),
+		0px 1px 2px rgba(0, 0, 0, 0.25);
 }
 .hide {
 	display: none;
@@ -173,4 +203,15 @@ main {
 }
 .yellow.light {
 	background: var(--yellow-light);
+}
+@media screen and (min-width: 570px) {
+	.main__container {
+		width: 55%;
+		min-height: 330px;
+	}
+}
+@media screen and (min-width: 680px) {
+	.main__container {
+		min-height: 370px;
+	}
 }
