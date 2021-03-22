@@ -54,7 +54,7 @@ header {
 	gap: 5px 0;
 	place-items: center;
 	color: var(--txt-color);
-	padding: 10px;
+	padding: 15px;
 }
 .toggle-dark-mode {
 	cursor: pointer;
@@ -79,6 +79,7 @@ header {
 	grid-area: 1 / 1 / 2 / 3;
 	text-transform: capitalize;
 	opacity: 87%;
+	margin-left: 5px;
 }
 .time-container {
 	display: grid;
@@ -93,25 +94,34 @@ header {
 	grid-area: 1/1/2/3;
 }
 .record-time,
-.record-score {
-	font-size: 10px;
+.record-score,
+.level-text {
+	font-size: 12px;
 	opacity: 60%;
 }
 #record-time,
-.score-output {
+.score-output,
+#current-level {
 	font-weight: bold;
 	opacity: 87%;
-	font-size: 10px;
+	font-size: 12px;
 }
 main {
 	width: 100%;
 	height: auto;
+	display: grid;
+	grid-template-rows: repeat(3, auto);
+	place-items: center;
+	gap: 10px;
 }
 .difficulty-options {
-	margin: 25px 0 30px;
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	padding: 0 5px;
+}
+.show-level {
+	color: var(--btn-txt-color);
 }
 .select-difficulty {
 	background: var(--foreground);
@@ -119,12 +129,12 @@ main {
 	margin: 0 5px;
 	width: 100%;
 	min-width: 75px;
-	max-width: 200px;
+	max-width: 250px;
 	border: none;
 	padding: 5px;
 	font-weight: 500;
-	box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.25),
-		0px 1px 2px rgba(0, 0, 0, 0.25);
+	box-shadow: 0px 3px 12px 2px rgba(0, 0, 0, 0.15),
+		0px 1px 2px 1px rgba(0, 0, 0, 0.1);
 	position: relative;
 	outline: none;
 }
@@ -155,8 +165,8 @@ main {
 	grid-template: repeat(2, 1fr) / repeat(2, 1fr);
 	overflow: hidden;
 	position: relative;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1),
-		0px 1px 2px 2px rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 0px 14px 2px rgba(0, 0, 0, 0.1),
+		0px 1px 12px 2px rgba(0, 0, 0, 0.15);
 }
 .button-div:nth-of-type(1) {
 	background: var(--red-btn);
@@ -188,8 +198,8 @@ main {
 	bottom: 42.5%;
 	left: 50%;
 	transform: translateX(-50%);
-	box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.25),
-		0px 1px 2px rgba(0, 0, 0, 0.25);
+	box-shadow: 0px 3px 16px 6px rgba(0, 0, 0, 0.15),
+		0px 3px 16px 6px rgba(0, 0, 0, 0.15);
 }
 .hide {
 	display: none;

@@ -18,7 +18,8 @@ const btnStart = document.getElementById('start-game'),
 	disableDarkMode = () => {
 		document.body.classList.remove('dark-mode');
 		localStorage.setItem('darkMode', null);
-	};
+	},
+	lvlAccum = document.querySelector('#current-level');
 let seconds = 0,
 	minutes = 0,
 	interval,
@@ -80,6 +81,9 @@ class Game {
 		}
 		timer.innerHTML = `${displayMinutes}:${displaySeconds}`;
 	}
+	showLevel() {
+		lvlAccum.innerHTML = this.level;
+	}
 	startTimer() {
 		interval = window.setInterval(this.timerLogic, 1000);
 	}
@@ -116,6 +120,7 @@ class Game {
 		this.stopTimer = this.stopTimer.bind(this);
 		this.togglebtnStart();
 		this.level = 1;
+		this.showLevel();
 		this.colours = {
 			red,
 			blue,
@@ -143,6 +148,7 @@ class Game {
 		}).then(() => {
 			setTimeout(this.nextLevel, 1250);
 			this.addScore();
+			this.showLevel();
 		});
 	}
 	lose() {
