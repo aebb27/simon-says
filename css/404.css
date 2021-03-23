@@ -1,0 +1,116 @@
+:root {
+	--bg: #fff;
+	--foreground: #fff;
+	--btn-txt-color: #000;
+	--red-btn: #800000;
+	--blue-btn: #000080;
+	--green-btn: #008000;
+	--yellow-btn: #929201;
+	--red-light: #ff0000;
+	--blue-light: #0000ff;
+	--green-light: #00ff00;
+	--yellow-light: #ffff00;
+	--txt-color: #000;
+	--inside-shadow: #fff;
+	--outside-shadow: #000;
+	--hover-shadows: rgba(0, 0, 0, 0.95);
+	--hover: #f6f6f6;
+	--active: #e3e3e3;
+	--border-line-color: 1px solid #000;
+}
+.dark-mode {
+	--bg: #111823;
+	--foreground: #2e343d;
+	--btn-txt-color: #fff;
+	--red-btn: #990000;
+	--blue-btn: #5124b3;
+	--green-btn: #008000;
+	--yellow-btn: #929201;
+	--red-light: #ff0000;
+	--blue-light: #7433ff;
+	--green-light: #00ff00;
+	--yellow-light: #ffff00;
+	--txt-color: #fff;
+	--inside-shadow: #111823;
+	--outside-shadow: #fff;
+	--hover-shadows: rgba(0, 0, 0, 0.95);
+	--hover: #363c45;
+	--active: #474c54;
+	--border-line-color: 1px solid #ffffff;
+}
+body {
+	background: var(--bg);
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	margin: 0 auto;
+	padding: 15px;
+}
+.toggle-dark-mode {
+	cursor: pointer;
+	outline: none;
+	background-color: transparent;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.toggle-dark-mode:active {
+	border: var(--border-line-color);
+}
+main {
+	width: 100%;
+	height: auto;
+	display: grid;
+	place-items: center;
+}
+.not-found {
+	position: relative;
+	top: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	color: var(--txt-color);
+}
+.not-found--title {
+	font-size: 48px;
+}
+.animated {
+	animation-fill-mode: both;
+	animation-iteration-count: infinite;
+}
+@keyframes pulse {
+	0% {
+		transform: scale(1.25);
+	}
+	50% {
+		transform: scale(2);
+	}
+	100% {
+		transform: scale(1.25);
+	}
+}
+.pulse {
+	animation-name: pulse;
+	animation-duration: 1s;
+}
+
+@media screen and (min-width: 767px) {
+	.toggle-dark-mode {
+		width: 48px;
+		height: 48px;
+	}
+	.toggle-dark-mode svg {
+		width: 24px;
+		height: 24px;
+	}
+	.not-found {
+		top: 50%;
+	}
+	.not-found--title {
+		font-size: 60px;
+	}
+	p {
+		font-size: 24px;
+	}
+}
